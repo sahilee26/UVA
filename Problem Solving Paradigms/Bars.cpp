@@ -54,12 +54,12 @@ int main()
        for (int i = 0; i < (1 << p); i++) { // for each subset, O(2^n)
             int sum = 0;
             for (int j = 0; j < p; j++){ // check membership, O(n)
-                if (i & (1 << j)) // test if bit ‘j’ is turned on in subset ‘i’?
-                     sum += arr[j]; // if yes, process ‘j’
+                if (i & (1 << j)) // test if bit â€˜jâ€™ is turned on in subset â€˜iâ€™?
+                     sum += arr[j]; // if yes, process â€˜jâ€™
             }
             if (sum == n) {
                 flag=1;
-                break;// the answer is found: bitmask ‘i’
+                break;// the answer is found: bitmask â€˜iâ€™
             }
         }
         if(flag)
