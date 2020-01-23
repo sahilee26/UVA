@@ -134,7 +134,7 @@ int main()
     ios_base::sync_with_stdio(0);
     cin.tie(0);
     int n;
-    while(scanf("%d", &n)!=EOF){
+    while(cin>> n){
         stack<ll> st;
         queue<ll> q;
         priority_queue<ll> pq;
@@ -147,28 +147,29 @@ int main()
                 st.push(a); q.push(a); pq.push(a);
             }
             else if(x==2){
-                if(st.empty() || q.empty() || pq.empty()){
+                if(st.empty() && q.empty() && pq.empty()){
                     imp=true;
                 }
-                else {
+                else{
                     ll elem=st.top();
                     st.pop();
                     if(elem!=a){
                         ss=0;
-                    }
+                        }
                     elem=q.front();
                     q.pop();
                     if(elem!=a){
                         qq=0;
-                    }
+                        }
                     elem=pq.top();
                     pq.pop();
                     if(elem!=a){
                         pqq=0;
-                    }
+                        }
                 }
             }
         }
+        // cout<<ss<<" "<<qq<<" "<<pqq<<endl;
         if(imp)
             cout<<"impossible"<<endl;
         else if(ss+qq+pqq>1)
@@ -179,5 +180,8 @@ int main()
             cout<<"queue"<<endl;
         else if(pqq)
             cout<<"priority queue"<<endl;
+        else
+            cout<<"impossible"<<endl;
     }
+    return 0;
 }
