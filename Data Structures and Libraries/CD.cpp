@@ -127,28 +127,42 @@ ll exp(ll x, ll p){
 //     ll p2 = query(2*node+1, mid+1, end, l, r);
 //     return (p1 + p2);
 // }
-#define M 1000000007
- 
+#define MOD 1000000007
+ll n, m, ans, lartotal; 
+vector<ll> v; 
+
+void backtrack(ll total, ll mask, ll p){
+    if(total> n){
+        return;
+    }
+    if(total > lartotal){
+        ans=mask;
+        lartotal=total; 
+    }
+    if(p>=m)
+        return;
+    backtrack(total+v[p], mask | (1<<p), p+1);
+    backtrack(total, mask, p+1);
+}
+
 int main()
 {
-    ios_base::sync_with_stdio(0);
-    cin.tie(0);
-    ll n, m;
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
     while(cin >> n >> m){
-        if(n==0 && m==0)
-            break;
-        ll x, y;
-        set<ll> s1, s2;
-        for(ll i=0; i<n; i++){
-            cin >> x;
-            s1.insert(x);
-        }  
-        ll ans=0;
-         for(ll i=0; i<n; i++){
-            cin >> y;
-            if(s1.find(y)!=s1.end())
-                ans++;
+        lartotal=-1, ans=-1;
+        v.clear();
+        ll tracklen;
+        for(ll i=0; i<m; i++){
+            cin >> tracklen;
+            v.pb(tracklen);
         }
-        cout<<ans<<endl;
+        backtrack(0, 0, 0);
+    
+        for(ll i=0; i<m; i++){
+            if(ans & (1<<i))
+                cout<<v[i]<<" ";
+        }
+        cout<<"sum: "<<lartotal<<endl;
     }
 }
